@@ -3,6 +3,7 @@ package com.example.newsfeed;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 public class NewsAdapter extends ArrayAdapter<News> {
+
+    private static final String LOG_TAG = NewsAdapter.class.getSimpleName() + "_DEBUG";
 
     public NewsAdapter(@NonNull Context context, @NonNull List<News> objects) {
         super(context, 0, objects);
@@ -46,7 +49,8 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
             convertView.setOnClickListener(event -> getContext().startActivity(
                     new Intent(Intent.ACTION_VIEW).setData(Uri.parse(news.getWebUrl()))));
-        }
+
+        } else Log.d(LOG_TAG, "newsItem = null");
 
         return convertView;
     }

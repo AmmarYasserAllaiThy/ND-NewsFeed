@@ -15,7 +15,7 @@ import java.util.List;
 public final class QueryUtils {
 
     private static final String
-            TAG = QueryUtils.class.getSimpleName(),
+            LOG_TAG = QueryUtils.class.getSimpleName() + "_DEBUG",
             RESPONSE = "response",
             RESULTS = "results",
             TYPE = "type",
@@ -34,14 +34,17 @@ public final class QueryUtils {
         try {
             jsonResponse = httpHandler.makeHttpRequest(url);
         } catch (IOException e) {
-            Log.e(TAG, "Problem making the HTTP request.", e);
+            Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
         return parseJSONData(jsonResponse);
     }
 
     private static List<News> parseJSONData(String JSON) {
-        if (TextUtils.isEmpty(JSON)) return null;
+        if (TextUtils.isEmpty(JSON)) {
+            Log.d(LOG_TAG, "JSON is empty");
+            return null;
+        }
 
         List<News> news = new ArrayList<>();
 
@@ -66,7 +69,7 @@ public final class QueryUtils {
             }
 
         } catch (JSONException e) {
-            Log.e(TAG, "Problem parsing the News JSON results", e);
+            Log.e(LOG_TAG, "Problem parsing the News JSON results", e);
         }
 
         return news;

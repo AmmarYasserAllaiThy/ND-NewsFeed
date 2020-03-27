@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
 
 public class ConnectivityReceiver extends BroadcastReceiver {
 
+    private static final String LOG_TAG = ConnectivityReceiver.class.getSimpleName() + "_DEBUG";
     private static ConnectivityReceiverListener connectivityReceiverListener;
 
     public ConnectivityReceiver() {
@@ -25,7 +27,10 @@ public class ConnectivityReceiver extends BroadcastReceiver {
 
     public static boolean isConnected(Context context) {
         ConnectivityManager conManager = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
-        if (conManager == null) return false;
+        if (conManager == null) {
+            Log.d(LOG_TAG, "CONNECTIVITY_SERVICE = null");
+            return false;
+        }
         NetworkInfo activeNetworkInfo = conManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }

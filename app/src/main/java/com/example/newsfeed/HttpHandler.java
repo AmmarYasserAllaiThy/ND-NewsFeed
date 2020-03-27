@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class HttpHandler {
 
-    private static final String TAG = HttpHandler.class.getSimpleName();
+    private static final String LOG_TAG = HttpHandler.class.getSimpleName() + "_DEBUG";
 
     public HttpHandler() {
     }
@@ -39,7 +39,7 @@ public class HttpHandler {
             jsonResponse = convertStreamToString(is);
 
         } catch (IOException e) {
-            Log.e(TAG, e.toString());
+            Log.d(LOG_TAG, "Problem in HTTP connection.", e);
 
         } finally {
             if (httpURLCon != null) httpURLCon.disconnect();
@@ -53,8 +53,9 @@ public class HttpHandler {
         try {
             return new URL(stringUrl);
         } catch (MalformedURLException exception) {
-            return null;
+            Log.d(LOG_TAG, "Problem in createUrl()", exception);
         }
+        return null;
     }
 
     private String convertStreamToString(InputStream is) {
@@ -66,13 +67,13 @@ public class HttpHandler {
             while ((line = br.readLine()) != null) sb.append(line).append('\n');
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.d(LOG_TAG, "Problem in reading from BufferedReader.", e);
 
         } finally {
             try {
                 is.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.d(LOG_TAG, "Problem in closing InputStream.", e);
             }
         }
 

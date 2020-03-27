@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements
         ConnectivityReceiver.ConnectivityReceiverListener {
 
     private static final String
+            LOG_TAG = MainActivity.class.getSimpleName() + "_DEBUG",
             GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search",
             API_KEY = "api-key",
             API_VALUE = "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b", //My API key
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements
         else {
             progress.setVisibility(View.GONE);
             tv.setText(getString(R.string.no_internet_connection));
+            Log.d(LOG_TAG, getString(R.string.no_internet_connection));
         }
     }
 
@@ -103,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements
     @NonNull
     @Override
     public Loader<List<News>> onCreateLoader(int id, @Nullable Bundle args) {
+        Log.d(LOG_TAG, "onCreateLoader");
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         String pageSize = sharedPreferences.getString(
@@ -135,20 +139,24 @@ public class MainActivity extends AppCompatActivity implements
         if (!sectionId.equals(getString(R.string.all)))
             uriBuilder.appendQueryParameter(getString(R.string.settings_section_id_key), sectionId);
 
-        Log.e(SHOW_TAGS, uriBuilder.toString());
+        Log.d(LOG_TAG, uriBuilder.toString());
 
         return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<List<News>> loader, List<News> data) {
+        Log.d(LOG_TAG, "onLoadFinished");
+
         newsAdapter.clear();
         if (data != null && !data.isEmpty()) newsAdapter.addAll(data);
+        else Log.d(LOG_TAG, getString(R.string.no_data_found));
         progress.setVisibility(View.GONE);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<News>> loader) {
+        Log.d(LOG_TAG, "onLoaderReset");
         newsAdapter.clear();
     }
 }

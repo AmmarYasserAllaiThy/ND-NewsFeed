@@ -14,7 +14,17 @@ import java.util.List;
 
 public final class QueryUtils {
 
-    private static final String TAG = QueryUtils.class.getSimpleName();
+    private static final String
+            TAG = QueryUtils.class.getSimpleName(),
+            RESPONSE = "response",
+            RESULTS = "results",
+            TYPE = "type",
+            LIVE_BLOG = "liveblog",
+            SECTION_NAME = "sectionName",
+            TAGS = "tags",
+            WEB_PUBLICATION_DATE = "webPublicationDate",
+            WEB_TITLE = "webTitle",
+            WEB_URL = "webUrl";
 
     public static List<News> fetchNewsData(String requestUrl) {
         HttpHandler httpHandler = new HttpHandler();
@@ -36,18 +46,22 @@ public final class QueryUtils {
         List<News> news = new ArrayList<>();
 
         try {
-            JSONObject rootJsonObject = new JSONObject(JSON);
-            JSONObject response = rootJsonObject.getJSONObject("response");
-            JSONArray results = response.getJSONArray("results");
+            JSONArray results = new JSONObject(JSON).getJSONObject(RESPONSE).getJSONArray(RESULTS);
 
             for (int i = 0; i < results.length(); i++) {
                 JSONObject result = results.getJSONObject(i);
+                JSONArray tags = result.getJSONArray(TAGS);
+                String authorName = null;
+
+                if (tags.length() > 0) authorName = tags.getJSONObject(0).getString(WEB_TITLE);
+
                 news.add(new News(
-                        result.getString("type").equals("liveblog"),
-                        result.getString("sectionName"),
-                        result.getString("webPublicationDate"),
-                        result.getString("webTitle"),
-                        result.getString("webUrl")
+                        result.getString(TYPE).equals(LIVE_BLOG),
+                        result.getString(SECTION_NAME),
+                        authorName,
+                        result.getString(WEB_PUBLICATION_DATE),
+                        result.getString(WEB_TITLE),
+                        result.getString(WEB_URL)
                 ));
             }
 

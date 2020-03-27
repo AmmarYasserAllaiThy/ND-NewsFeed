@@ -23,6 +23,7 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:contentDescription="@string/no_image"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_brightness_24dp"
             android:visibility="gone" />
 
@@ -31,6 +32,12 @@
     <TextView
         android:id="@+id/webTitle_tv"
         style="@style/ListItemTV.Title" />
+
+    <TextView
+        android:id="@+id/authorName_tv"
+        style="@style/ListItemTV"
+        android:drawableStart="@drawable/ic_person_outline_24dp"
+        android:drawablePadding="@dimen/listView_padding" />
 
     <TextView
         android:id="@+id/webPubDate_tv"

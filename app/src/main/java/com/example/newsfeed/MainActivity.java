@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,9 @@ public class MainActivity extends AppCompatActivity implements
     private static final String
             GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search",
             API_KEY = "api-key",
-            API_VALUE = "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b"; //My API key
+            API_VALUE = "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b", //My API key
+            SHOW_TAGS = "show-tags",
+            CONTRIBUTOR = "contributor";
 
     private ProgressBar progress;
     private TextView tv;
@@ -124,12 +127,15 @@ public class MainActivity extends AppCompatActivity implements
         Uri.Builder uriBuilder = uri.buildUpon();
 
         uriBuilder.appendQueryParameter(API_KEY, API_VALUE);
+        uriBuilder.appendQueryParameter(SHOW_TAGS, CONTRIBUTOR);
         uriBuilder.appendQueryParameter(getString(R.string.settings_page_size_key), pageSize);
         uriBuilder.appendQueryParameter(getString(R.string.settings_order_by_key), orderBy);
         if (!type.equals(getString(R.string.all)))
             uriBuilder.appendQueryParameter(getString(R.string.settings_type_key), type);
         if (!sectionId.equals(getString(R.string.all)))
             uriBuilder.appendQueryParameter(getString(R.string.settings_section_id_key), sectionId);
+
+        Log.e(SHOW_TAGS, uriBuilder.toString());
 
         return new NewsLoader(this, uriBuilder.toString());
     }

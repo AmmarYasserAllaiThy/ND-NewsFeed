@@ -34,11 +34,14 @@ public class NewsAdapter extends ArrayAdapter<News> {
             final ImageView liveIV = convertView.findViewById(R.id.live_iv);
             final TextView sectionNameTV = convertView.findViewById(R.id.sectionName_tv);
             final TextView webTitleTV = convertView.findViewById(R.id.webTitle_tv);
+            final TextView authorNameTV = convertView.findViewById(R.id.authorName_tv);
             final TextView webPubDateTV = convertView.findViewById(R.id.webPubDate_tv);
 
             liveIV.setVisibility(news.isLive() ? View.VISIBLE : View.GONE);
             sectionNameTV.setText(news.getSectionName());
             webTitleTV.setText(news.getWebTitle());
+            if (news.getAuthorName() == null) authorNameTV.setVisibility(View.GONE);
+            else authorNameTV.setText(news.getAuthorName());
             webPubDateTV.setText(news.getWebPubDate());
 
             convertView.setOnClickListener(event -> getContext().startActivity(

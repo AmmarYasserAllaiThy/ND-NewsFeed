@@ -4,13 +4,15 @@ public class News {
 
     private boolean live;
     private String sectionName;
+    private String authorName;
     private String webPubDate;
     private String webTitle;
     private String webUrl;
 
-    public News(boolean live, String sectionName, String webPubDate, String webTitle, String webUrl) {
+    public News(boolean live, String sectionName, String authorName, String webPubDate, String webTitle, String webUrl) {
         this.live = live;
         this.sectionName = sectionName;
+        this.authorName = authorName;
         this.webPubDate = webPubDate;
         this.webTitle = webTitle;
         this.webUrl = webUrl;
@@ -22,6 +24,10 @@ public class News {
 
     public String getSectionName() {
         return sectionName;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public String getWebPubDate() {

@@ -1,3 +1,127 @@
 <resources>
-    <string name="app_name">News Feed</string>
+    <string name="app_name">What\'s news</string>
+    <string name="no_image">No Image</string>
+    <string name="settings_menu_item">Settings</string>
+    <string name="settings_title">News Preferences</string>
+    <string name="no_data_found">No data found</string>
+    <string name="no_internet_connection">No internet connection\nYou\'re offline</string>
+
+
+    <string name="settings_page_size_label">Limit (news number)</string>
+    <string name="settings_page_size_key" translatable="false">page-size</string>
+    <string name="settings_page_size_default" translatable="false">10</string>
+
+
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order-by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
+    <string name="settings_order_by_newest_label" translatable="false">Newest</string>
+    <string name="settings_order_by_newest_value" translatable="false">newest</string>
+    <string name="settings_order_by_oldest_label" translatable="false">Oldest</string>
+    <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
+    <string name="settings_order_by_relevance_label" translatable="false">Relevance</string>
+    <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+
+    <string-array name="settings_order_by_labels">
+        <item>@string/settings_order_by_newest_label</item>
+        <item>@string/settings_order_by_oldest_label</item>
+        <item>@string/settings_order_by_relevance_label</item>
+    </string-array>
+
+    <string-array name="settings_order_by_values">
+        <item>@string/settings_order_by_newest_value</item>
+        <item>@string/settings_order_by_oldest_value</item>
+        <item>@string/settings_order_by_relevance_value</item>
+    </string-array>
+
+
+    <string name="all" translatable="false">All</string>
+
+
+    <string name="settings_type_label">Type</string>
+    <string name="settings_type_key" translatable="false">type</string>
+    <string name="settings_type_default" translatable="false">@string/all</string>
+    <string name="settings_type_live_label" translatable="false">Live</string>
+    <string name="settings_type_live_value" translatable="false">liveblog</string>
+    <string name="settings_type_article_label" translatable="false">Article</string>
+    <string name="settings_type_article_value" translatable="false">article</string>
+    <string name="settings_type_interactive_label" translatable="false">Interactive</string>
+    <string name="settings_type_interactive_value" translatable="false">interactive</string>
+
+    <string-array name="settings_type_labels">
+        <item>@string/settings_type_live_label</item>
+        <item>@string/settings_type_article_label</item>
+        <item>@string/settings_type_interactive_label</item>
+        <item>@string/all</item>
+    </string-array>
+
+    <string-array name="settings_type_values">
+        <item>@string/settings_type_live_value</item>
+        <item>@string/settings_type_article_value</item>
+        <item>@string/settings_type_interactive_value</item>
+        <item>@string/all</item>
+    </string-array>
+
+
+    <string name="settings_section_id_label">Interest</string>
+    <string name="settings_section_id_key" translatable="false">section</string>
+    <string name="settings_section_id_default" translatable="false">@string/all</string>
+
+    <string name="settings_section_id_world_label" translatable="false">World news</string>
+    <string name="settings_section_id_world_value" translatable="false">world</string>
+    <string name="settings_section_id_politics_label" translatable="false">Politics</string>
+    <string name="settings_section_id_politics_value" translatable="false">politics</string>
+    <string name="settings_section_id_business_label" translatable="false">Business</string>
+    <string name="settings_section_id_business_value" translatable="false">business</string>
+    <string name="settings_section_id_music_label" translatable="false">Music</string>
+    <string name="settings_section_id_music_value" translatable="false">music</string>
+    <string name="settings_section_id_law_label" translatable="false">Law</string>
+    <string name="settings_section_id_law_value" translatable="false">law</string>
+    <string name="settings_section_id_education_label" translatable="false">Education</string>
+    <string name="settings_section_id_education_value" translatable="false">education</string>
+    <string name="settings_section_id_stage_label" translatable="false">Stage</string>
+    <string name="settings_section_id_stage_value" translatable="false">stage</string>
+    <string name="settings_section_id_commentisfree_label" translatable="false">Opinion</string>
+    <string name="settings_section_id_commentisfree_value" translatable="false">commentisfree</string>
+    <string name="settings_section_id_society_label" translatable="false">Society</string>
+    <string name="settings_section_id_society_value" translatable="false">society</string>
+    <string name="settings_section_id_film_label" translatable="false">Film</string>
+    <string name="settings_section_id_film_value" translatable="false">film</string>
+    <string name="settings_section_id_football_label" translatable="false">Football</string>
+    <string name="settings_section_id_football_value" translatable="false">football</string>
+    <string name="settings_section_id_lifeandstyle_label" translatable="false">Life and style</string>
+    <string name="settings_section_id_lifeandstyle_value" translatable="false">lifeandstyle</string>
+
+    <string-array name="settings_section_id_labels">
+        <item>@string/settings_section_id_world_label</item>
+        <item>@string/settings_section_id_politics_label</item>
+        <item>@string/settings_section_id_business_label</item>
+        <item>@string/settings_section_id_music_label</item>
+        <item>@string/settings_section_id_law_label</item>
+        <item>@string/settings_section_id_education_label</item>
+        <item>@string/settings_section_id_stage_label</item>
+        <item>@string/settings_section_id_commentisfree_label</item>
+        <item>@string/settings_section_id_society_label</item>
+        <item>@string/settings_section_id_film_label</item>
+        <item>@string/settings_section_id_football_label</item>
+        <item>@string/settings_section_id_lifeandstyle_label</item>
+        <item>@string/all</item>
+    </string-array>
+
+    <string-array name="settings_section_id_values">
+        <item>@string/settings_section_id_world_value</item>
+        <item>@string/settings_section_id_politics_value</item>
+        <item>@string/settings_section_id_business_value</item>
+        <item>@string/settings_section_id_music_value</item>
+        <item>@string/settings_section_id_law_value</item>
+        <item>@string/settings_section_id_education_value</item>
+        <item>@string/settings_section_id_stage_value</item>
+        <item>@string/settings_section_id_commentisfree_value</item>
+        <item>@string/settings_section_id_society_value</item>
+        <item>@string/settings_section_id_film_value</item>
+        <item>@string/settings_section_id_football_value</item>
+        <item>@string/settings_section_id_lifeandstyle_value</item>
+        <item>@string/all</item>
+    </string-array>
+
 </resources>

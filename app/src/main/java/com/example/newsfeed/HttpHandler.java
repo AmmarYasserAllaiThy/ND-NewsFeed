@@ -39,7 +39,7 @@ public class HttpHandler {
             jsonResponse = convertStreamToString(is);
 
         } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, e.toString());
 
         } finally {
             if (httpURLCon != null) httpURLCon.disconnect();

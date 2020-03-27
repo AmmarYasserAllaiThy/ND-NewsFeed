@@ -1,6 +1,5 @@
 package com.example.newsfeed;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -16,20 +15,19 @@ public class NewsPreferenceFragment extends PreferenceFragment implements Prefer
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.settings_main);
 
-        Preference pageSize = findPreference(getString(R.string.settings_page_size_key));
-        Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
-        Preference type = findPreference(getString(R.string.settings_type_key));
-        Preference sectionId = findPreference(getString(R.string.settings_section_id_key));
-
-        bindPreferenceSummaryToValue(pageSize, orderBy, type, sectionId);
+        bindPreferenceSummaryToValue(
+                findPreference(getString(R.string.settings_page_size_key)),
+                findPreference(getString(R.string.settings_order_by_key)),
+                findPreference(getString(R.string.settings_type_key)),
+                findPreference(getString(R.string.settings_section_id_key)));
     }
 
     private void bindPreferenceSummaryToValue(Preference... prefs) {
         for (Preference pref : prefs) {
             pref.setOnPreferenceChangeListener(this);
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(pref.getContext());
-            String preferenceString = preferences.getString(pref.getKey(), "");
-            onPreferenceChange(pref, preferenceString);
+            onPreferenceChange(pref, PreferenceManager
+                    .getDefaultSharedPreferences(pref.getContext())
+                    .getString(pref.getKey(), ""));
         }
     }
 

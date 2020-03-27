@@ -2,8 +2,6 @@ package com.example.newsfeed;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,11 +21,17 @@ import androidx.loader.content.Loader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
+public class MainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<List<News>>,
+        ConnectivityReceiver.ConnectivityReceiverListener {
 
-    private static final String GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search";
+    private static final String
+            GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search",
+            API_KEY = "api-key",
+            API_VALUE = "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b"; //My API key
 
     private ProgressBar progress;
+    private TextView tv;
 
     private NewsAdapter newsAdapter;
 
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         progress = findViewById(R.id.progress);
         ListView listView = findViewById(R.id.listView);
-        TextView tv = findViewById(R.id.tv);
+        tv = findViewById(R.id.tv);
 
         // Configure Adapter, EmptyView, and ItemClickListener of listView
         newsAdapter = new NewsAdapter(this, new ArrayList<>());
@@ -51,18 +55,29 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(news.getWebUrl())));
         });
 
-        // Check whether connected or not
-        ConnectivityManager conManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = conManager.getActiveNetworkInfo();
-        boolean isConnected = activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+        tv.setOnClickListener(v -> populateList());
 
-        // init loader if connected
-        if (isConnected) getSupportLoaderManager().initLoader(0, null, this);
+        populateList();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ConnectivityReceiver.setConnectivityListener(this);
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected, int id) {
+        if (isConnected) getSupportLoaderManager().initLoader(id, null, this);
         else {
-            // Show message if not connected
             progress.setVisibility(View.GONE);
             tv.setText(getString(R.string.no_internet_connection));
         }
+    }
+
+    private void populateList() {
+        progress.setVisibility(View.VISIBLE);
+        onNetworkConnectionChanged(ConnectivityReceiver.isConnected(this), (int) (Math.random() * 100));
     }
 
 
@@ -108,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Uri uri = Uri.parse(GUARDIAN_REQUEST_URL);
         Uri.Builder uriBuilder = uri.buildUpon();
 
-        uriBuilder.appendQueryParameter("api-key", "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b");
+        uriBuilder.appendQueryParameter(API_KEY, API_VALUE);
         uriBuilder.appendQueryParameter(getString(R.string.settings_page_size_key), pageSize);
         uriBuilder.appendQueryParameter(getString(R.string.settings_order_by_key), orderBy);
         if (!type.equals(getString(R.string.all)))

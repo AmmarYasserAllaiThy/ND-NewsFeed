@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -10,7 +11,6 @@
         android:id="@+id/progress"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:indeterminate="true" />
 
     <ListView
@@ -26,10 +26,12 @@
 
     <TextView
         android:id="@+id/tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:text="@string/no_data_found"
-        android:textSize="16sp" />
+        android:textSize="17sp" />
 
 </LinearLayout>

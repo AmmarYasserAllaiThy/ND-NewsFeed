@@ -10,6 +10,7 @@ import android.util.Log;
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
 
+// TODO: Just review
 public class ConnectivityReceiver extends BroadcastReceiver {
 
     private static final String LOG_TAG = ConnectivityReceiver.class.getSimpleName() + "_DEBUG";

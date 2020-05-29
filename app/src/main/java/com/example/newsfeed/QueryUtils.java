@@ -56,12 +56,15 @@ public final class QueryUtils {
                 JSONArray tags = result.getJSONArray(TAGS);
                 String authorName = null;
 
+
+                // TODO: Extract data of author bio from JSON
                 if (tags.length() > 0) authorName = tags.getJSONObject(0).getString(WEB_TITLE);
 
                 news.add(new News(
                         result.getString(TYPE).equals(LIVE_BLOG),
                         result.getString(SECTION_NAME),
                         authorName,
+                        // TODO: Add author bio
                         result.getString(WEB_PUBLICATION_DATE),
                         result.getString(WEB_TITLE),
                         result.getString(WEB_URL)

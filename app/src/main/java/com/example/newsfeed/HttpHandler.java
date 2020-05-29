@@ -59,6 +59,7 @@ public class HttpHandler {
     }
 
     private String convertStreamToString(InputStream is) {
+        // TODO: replace Scanner with BufferedReader
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line;

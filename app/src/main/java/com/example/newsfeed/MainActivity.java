@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements
             LOG_TAG = MainActivity.class.getSimpleName() + "_DEBUG",
             GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search",
             API_KEY = "api-key",
-            API_VALUE = "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b", //My API key
+            API_VALUE = "eb13dc4f-d12b-46cd-b2e7-07a51dec7f8b", //My API key. TODO: replace with yours
             SHOW_TAGS = "show-tags",
             CONTRIBUTOR = "contributor";
 
@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements
                 getString(R.string.settings_section_id_key),
                 getString(R.string.settings_section_id_default)
         );
+        // extra TODO: Add sharedPreferences item for q (https://open-platform.theguardian.com/documentation/search)
 
 
         Uri uri = Uri.parse(GUARDIAN_REQUEST_URL);
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements
         uriBuilder.appendQueryParameter(SHOW_TAGS, CONTRIBUTOR);
         uriBuilder.appendQueryParameter(getString(R.string.settings_page_size_key), pageSize);
         uriBuilder.appendQueryParameter(getString(R.string.settings_order_by_key), orderBy);
+        // extra TODO: Add query parameter for q
         if (!type.equals(getString(R.string.all)))
             uriBuilder.appendQueryParameter(getString(R.string.settings_type_key), type);
         if (!sectionId.equals(getString(R.string.all)))

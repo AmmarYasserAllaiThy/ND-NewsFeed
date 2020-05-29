@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 
 import androidx.annotation.Nullable;
 
+// TODO: Just review
 public class NewsPreferenceFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
     @Override

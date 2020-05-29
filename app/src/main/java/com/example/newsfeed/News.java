@@ -8,6 +8,7 @@ public class News {
     private String webPubDate;
     private String webTitle;
     private String webUrl;
+    // TODO: Add property of author bio
 
     public News(boolean live, String sectionName, String authorName, String webPubDate, String webTitle, String webUrl) {
         this.live = live;
